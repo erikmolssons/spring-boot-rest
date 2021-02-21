@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: api
+  description: Spring boot REST API
+  termsOfService: http://swagger.io/terms/
+  contact:
+    url: https://github.com/erikmolssons
+  license:
+    name: MIT
+    url: LICENSE
+  version: "1"
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /{id}:
+    get:
+      tags:
+      - customer-endpoint
+      operationId: buildResponseFindOne
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/springbootrest.Customer'
+    put:
+      tags:
+      - customer-endpoint
+      operationId: buildResponseUpdate
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/springbootrest.Customer'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/springbootrest.Customer'
+    delete:
+      tags:
+      - customer-endpoint
+      operationId: buildResponseDelete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /:
+    get:
+      tags:
+      - customer-endpoint
+      operationId: buildResponseFindAll
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/springbootrest.Customer'
+    post:
+      tags:
+      - customer-endpoint
+      operationId: buildResponseInsert
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/springbootrest.Customer'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/springbootrest.Customer'
+components:
+  schemas:
+    springbootrest.Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          pattern: "[a-zA-Z]+"
+          type: string
+        lastName:
+          pattern: "[a-zA-Z]+"
+          type: string
+        email:
+          type: string
